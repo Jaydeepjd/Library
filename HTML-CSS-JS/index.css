@@ -1,0 +1,90 @@
+/* Universal selector (*) */
+* {
+  /* color: red; */
+  padding: 0;
+  margin: 0;
+}
+
+/* Tag Selector (tag name) */
+p {
+  /* color: green; */
+}
+body {
+  border: 1px solid red;
+  /* background-color: red; */
+}
+
+/* Id selector (#) */
+#a {
+  color: red;
+}
+
+/* class Selector(.) */
+.b {
+  color: blue;
+  background-color: grey;
+  font-size: 30px;
+  font-weight: 100;
+  border: 2px solid red;
+}
+h1 {
+  border: 1px solid red;
+  /* padding: 100px; */
+  /* top right bottom left */
+  /* padding: 200px 40px 20px 200px; */
+  padding: 30px 80px;
+  margin: 20px;
+}
+
+/* group Selector(,) */
+#a,
+h1 {
+  color: purple;
+}
+/* descendent selector */
+#c p {
+  background-color: green;
+}
+
+/* Child selctor (>) */
+#c > p {
+  color: red;
+}
+
+/* Attribute selector[] */
+button[type="submit"] {
+  background-color: red;
+  color: yellow;
+}
+/* Pseudo class : */
+li:nth-child(2) {
+  color: red;
+  font-size: 32px;
+}
+ul {
+  list-style-type: disc;
+}
+ol {
+  list-style-type: upper-roman;
+}
+
+li:nth-child(2):hover {
+  color: yellow;
+  /* font-size: 64px; */
+  background-color: green;
+}
+
+/* Pseudo Elements :: */
+
+h1::after {
+  content: " Hello added from css ";
+}
+h1::first-letter {
+  color: Grey;
+  font-size: 49px;
+}
+
+.sss::first-line {
+  font-size: 28px;
+  font-weight: 700;
+}

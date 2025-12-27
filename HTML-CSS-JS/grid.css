@@ -1,0 +1,145 @@
+.container {
+  border: 1px solid red;
+  height: 90vh;
+  display: grid;
+  /* grid-template-columns: 100px 100px 200px; */
+  /* grid-template-columns: repeat(6, 100px); */
+  grid-template-columns: repeat(4, 1fr);
+  /* grid-template-rows: ; */
+  grid-template-rows: 100px 200px;
+  /* row-gap: 10px; */
+  /* column-gap: 10px; */
+  gap: 10px;
+  /* justify-content: center;
+  align-content: center; */
+}
+
+.item {
+  background-color: yellow;
+  /* padding: 50px; */
+  color: red;
+  font-size: 24px;
+  font-weight: 700;
+  border: 1px solid green;
+}
+.item:nth-child(1) {
+  /* grid-column-start: 4;
+  grid-column-end: -1; */
+  grid-column: 4/-1;
+  /* grid-row-start: -2;
+  grid-row-end: -1; */
+  grid-row: -2/-1;
+}
+
+body {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 1fr 3fr 1fr;
+  height: 100vh;
+  gap: 10px;
+  background-color: lightgray;
+  grid-template-areas:
+    "header header header"
+    "navbar mainArea aside"
+    "foot foot foot";
+}
+header {
+  grid-area: header;
+  background-color: lightgreen;
+  padding: 20px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 32px;
+}
+nav {
+  grid-area: navbar;
+  background-color: lightblue;
+  font-weight: 700;
+}
+aside {
+  grid-area: aside;
+  background-color: yellow;
+  color: red;
+}
+
+main {
+  grid-area: mainArea;
+  background-color: green;
+  font-size: 24px;
+  border: 2px solid red;
+}
+footer {
+  grid-area: foot;
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+.a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Standard Media Queries */
+
+/* 1 Mobile devices less than 576px */
+/* 2. Tabs 768px  */
+/* 3. Small screens 992px */
+/* 4. Normal screens 1200px */
+
+@media (max-width: 576px) {
+  /* for mobiles */
+  body {
+    grid-template-columns: 1fr 3fr;
+
+    grid-template-areas:
+      "header header "
+      "navbar mainArea "
+      "foot foot ";
+  }
+  aside {
+    display: none !important;
+  }
+  nav {
+    background-color: red;
+  }
+  main {
+    background-color: blue;
+    font-size: 64px;
+    color: white;
+  }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+  /* for tabs */
+  body {
+    grid-template-columns: 3fr 1fr;
+
+    grid-template-areas:
+      " header header"
+      " mainArea aside"
+      " foot foot";
+  }
+  nav {
+    display: none !important;
+  }
+  main {
+    color: yellow;
+    border: none;
+    background-color: red;
+  }
+  aside {
+    font-size: 32px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+  body {
+    grid-template-areas:
+      "header header header"
+      "aside mainArea  navbar"
+      "foot foot foot";
+  }
+}

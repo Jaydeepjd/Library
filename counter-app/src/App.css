@@ -1,0 +1,39 @@
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+}
+
+.counter {
+  border: 1px solid black;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  padding: 50px 0;
+}
+.counter p {
+  font-size: 32px;
+  font-weight: 700;
+}
+button {
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  border-radius: 8px;
+  margin-left: 20px;
+}
+.inc {
+  background-color: green;
+}
+.dec {
+  background-color: red;
+}
+
+.a {
+  color: red;
+  font-size: 12px;
+}
