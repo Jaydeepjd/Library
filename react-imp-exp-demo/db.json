@@ -1,0 +1,52 @@
+{
+  "users": [
+    {
+      "id": "1756306576432",
+      "firstName": "Jaydeep",
+      "lastName": "Dhokaihey",
+      "email": "dhokaijaydeep@gmail.com",
+      "password": "jaydeep",
+      "mobile": "1234567890"
+    },
+    {
+      "id": "1757234443296",
+      "firstName": "Jaydeep",
+      "lastName": "Dhokaihey",
+      "email": "dhokaijaydeep@gmail.com",
+      "password": "jaydeep",
+      "mobile": "1234567890"
+    },
+    {
+      "id": "1757234438593",
+      "firstName": "uj",
+      "lastName": "Dhokaihey",
+      "email": "d@d,d",
+      "password": 123456,
+      "mobile": 1234567890
+    },
+    {
+      "id": 1763811901014,
+      "firstName": "Jaydeep",
+      "lastName": "Dhokai",
+      "email": "dhokaijaydeep@gmail.com",
+      "password": "1234567",
+      "mobile": "1234567890"
+    },
+    {
+      "id": 1763811920807,
+      "firstName": "Jaydeeptest",
+      "lastName": "Dhokai",
+      "email": "dhokaijaydeep@gmail.com",
+      "password": "1234567",
+      "mobile": "1234567890"
+    },
+    {
+      "id": 999999,
+      "mobile": "0123456789",
+      "lastName": "User",
+      "password": "secret",
+      "email": "test@example.com",
+      "firstName": "Test"
+    }
+  ]
+}
