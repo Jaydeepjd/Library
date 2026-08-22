@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+
+  /* Brand palette */
+  --brand-navy-950: #0a1730;
+  --brand-navy-900: #0e1f42;
+  --brand-navy-800: #16295a;
+  --brand-navy-700: #1f3a7a;
+  --brand-red-700: #7f1229;
+  --brand-red-600: #9c1b34;
+  --brand-red-500: #b32240;
+  --brand-gold: #f2a71b;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --color-brand-navy-950: var(--brand-navy-950);
+  --color-brand-navy-900: var(--brand-navy-900);
+  --color-brand-navy-800: var(--brand-navy-800);
+  --color-brand-navy-700: var(--brand-navy-700);
+  --color-brand-red-700: var(--brand-red-700);
+  --color-brand-red-600: var(--brand-red-600);
+  --color-brand-red-500: var(--brand-red-500);
+  --color-brand-gold: var(--brand-gold);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 22s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+}

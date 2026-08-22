@@ -1,0 +1,164 @@
+// Prisma schema for the custom printing eCommerce app.
+// SQLite has no native array/enum-array or JSON column type in older versions,
+// so image lists are stored as a JSON-encoded string and parsed in the data layer.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+enum Role {
+  CUSTOMER
+  ADMIN
+}
+
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  SHIPPED
+  DELIVERED
+}
+
+enum DiscountType {
+  PERCENT
+  FIXED
+}
+
+enum QuoteStatus {
+  NEW
+  RESPONDED
+}
+
+model User {
+  id                      String                   @id @default(cuid())
+  name                    String
+  email                   String                   @unique
+  passwordHash            String
+  role                    Role                     @default(CUSTOMER)
+  emailVerifiedAt         DateTime?
+  createdAt               DateTime                 @default(now())
+  orders                  Order[]
+  emailVerificationTokens EmailVerificationToken[]
+}
+
+model EmailVerificationToken {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
+
+model Category {
+  id       String     @id @default(cuid())
+  name     String
+  slug     String     @unique
+  parentId String?
+  parent   Category?  @relation("CategoryToSubcategory", fields: [parentId], references: [id])
+  children Category[] @relation("CategoryToSubcategory")
+  products Product[]
+}
+
+model Product {
+  id              String           @id @default(cuid())
+  name            String
+  slug            String           @unique
+  description     String
+  basePrice       Float
+  images          String // JSON-encoded string[]
+  isFeatured      Boolean          @default(false)
+  categoryId      String
+  category        Category         @relation(fields: [categoryId], references: [id])
+  materialOptions MaterialOption[]
+  orderItems      OrderItem[]
+  createdAt       DateTime         @default(now())
+}
+
+model MaterialOption {
+  id            String      @id @default(cuid())
+  productId     String
+  product       Product     @relation(fields: [productId], references: [id], onDelete: Cascade)
+  label         String
+  priceModifier Float       @default(0)
+  orderItems    OrderItem[]
+}
+
+model PromoCode {
+  id        String       @id @default(cuid())
+  code      String       @unique
+  type      DiscountType
+  value     Float
+  active    Boolean      @default(true)
+  expiresAt DateTime?
+  orders    Order[]
+}
+
+model Order {
+  id                   String      @id @default(cuid())
+  userId               String
+  user                 User        @relation(fields: [userId], references: [id])
+  status               OrderStatus @default(PENDING)
+  subtotal             Float
+  discount             Float       @default(0)
+  total                Float
+  promoCodeId          String?
+  promoCode            PromoCode?  @relation(fields: [promoCodeId], references: [id])
+  shippingName         String
+  shippingLine1        String
+  shippingLine2        String?
+  shippingCity         String
+  shippingState        String
+  shippingPostal       String
+  shippingCountry      String
+  paypalOrderId        String?
+  // One shared secure link (shown on the Thank You page + emailed) that
+  // gates artwork upload for every item in this order.
+  uploadToken          String?     @unique
+  uploadTokenExpiresAt DateTime?
+  items                OrderItem[]
+  createdAt            DateTime    @default(now())
+}
+
+model OrderItem {
+  id               String          @id @default(cuid())
+  orderId          String
+  order            Order           @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId        String
+  product          Product         @relation(fields: [productId], references: [id])
+  materialOptionId String?
+  materialOption   MaterialOption? @relation(fields: [materialOptionId], references: [id])
+  widthIn          Float
+  heightIn         Float
+  quantity         Int
+  unitPrice        Float
+  lineTotal        Float
+  artworkUpload    ArtworkUpload?
+}
+
+model ArtworkUpload {
+  id          String    @id @default(cuid())
+  orderItemId String    @unique
+  orderItem   OrderItem @relation(fields: [orderItemId], references: [id], onDelete: Cascade)
+  filePath    String?
+  fileType    String?
+  fileSize    Int?
+  uploadedAt  DateTime?
+  createdAt   DateTime  @default(now())
+}
+
+model QuoteRequest {
+  id          String      @id @default(cuid())
+  name        String
+  email       String
+  productType String
+  size        String
+  quantity    Int
+  message     String?
+  status      QuoteStatus @default(NEW)
+  createdAt   DateTime    @default(now())
+}
